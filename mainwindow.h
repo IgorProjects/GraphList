@@ -17,13 +17,17 @@ public:
     ~MainWindow();
 
     QTreeWidgetItem* item = new QTreeWidgetItem();
+    void mouseDoubleClickEvent(QMouseEvent* event) override;
 
 private slots:
-
 
     void on_addButton_clicked();
 
     void on_deleteButton_clicked();
+
+    void on_treeWidget_itemClicked(QTreeWidgetItem *item, int column);
+
+    void on_treeWidget_doubleClicked(const QModelIndex &index);
 
 private:
     Ui::MainWindow *ui;
