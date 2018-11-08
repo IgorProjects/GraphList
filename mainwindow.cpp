@@ -9,7 +9,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->treeWidget->clear();
-    this->setMouseTracking(true);
+    ui->treeWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->treeWidget, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(unfocus(const QPoint&)));
 }
 
 MainWindow::~MainWindow()
@@ -32,13 +33,12 @@ void MainWindow::on_addButton_clicked()
     QTreeWidgetItem* currentParentItem = ui->treeWidget->currentItem();
     if (currentParentItem != nullptr) {
         currentParentItem->addChild(tempItem);
-        ui->treeWidget->setItemWidget(tempItem, 0, tempLineEdit);
-        tempLineEdit->setReadOnly(true);
     } else {
         ui->treeWidget->addTopLevelItem(tempItem);
-        ui->treeWidget->setItemWidget(tempItem, 0, tempLineEdit);
-        tempLineEdit->setReadOnly(true);
     }
+    ui->treeWidget->setItemWidget(tempItem, 0, tempLineEdit);
+    //ui->treeWidget->setCurrentItem(nullptr);
+    tempLineEdit->setReadOnly(true);
     ui->newItemName->clear();
 
 }
@@ -50,17 +50,7 @@ void MainWindow::on_deleteButton_clicked()
     delete tempItem;
 }
 
-void MainWindow::on_treeWidget_itemClicked(QTreeWidgetItem *item, int column)
-{
-
-}
-
-void MainWindow::on_treeWidget_doubleClicked(const QModelIndex &index)
-{
-
-}
-
-void MainWindow::mouseDoubleClickEvent(QMouseEvent* event)
+void MainWindow::unfocus(const QPoint &pos)
 {
     ui->treeWidget->setCurrentItem(nullptr);
 }

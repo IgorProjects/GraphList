@@ -17,7 +17,6 @@ public:
     ~MainWindow();
 
     QTreeWidgetItem* item = new QTreeWidgetItem();
-    void mouseDoubleClickEvent(QMouseEvent* event) override;
 
 private slots:
 
@@ -25,9 +24,7 @@ private slots:
 
     void on_deleteButton_clicked();
 
-    void on_treeWidget_itemClicked(QTreeWidgetItem *item, int column);
-
-    void on_treeWidget_doubleClicked(const QModelIndex &index);
+    void unfocus(const QPoint &pos);
 
 private:
     Ui::MainWindow *ui;
