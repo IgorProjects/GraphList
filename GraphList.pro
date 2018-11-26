@@ -24,10 +24,12 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    customtreewidget.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    customtreewidget.h
 
 FORMS += \
         mainwindow.ui

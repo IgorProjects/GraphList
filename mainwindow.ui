@@ -64,6 +64,9 @@
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
           <widget class="QLineEdit" name="newItemName">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="placeholderText">
             <string>Введите имя новго элемента...</string>
            </property>
