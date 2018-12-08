@@ -2,7 +2,8 @@
 #include "ui_mainwindow.h"
 #include "QMessageBox"
 #include "QListWidget"
-#include "customtreewidget.h"
+#include "serializator.h"
+#include "customtreeitem.h"
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -26,18 +27,21 @@ void MainWindow::on_addButton_clicked()
         QMessageBox::warning(this, "Ошибочка", "Введите имя элемента!");
         return;
     }
-
+    auto newItem = new CustomTreeItem(ui->newItemName->text(), ui->treeWidget);
     if (ui->treeWidget->currentItem() != nullptr) {
-        ui->treeWidget->currentItem()->addChild(new customTreeWidget(ui->newItemName->text(), ui->treeWidget));
+        Serializator::Instance().AddlItem(newItem, static_cast<CustomTreeItem*>(ui->treeWidget->currentItem()));
+        ui->treeWidget->currentItem()->addChild(newItem);
     } else {
-        ui->treeWidget->addTopLevelItem(new customTreeWidget(ui->newItemName->text(), ui->treeWidget));
+        Serializator::Instance().AddlItem(newItem);
+        ui->treeWidget->addTopLevelItem(newItem);
     }
-
+    newItem->FirstSetLabel();
     ui->newItemName->clear();
 }
 
 void MainWindow::on_deleteButton_clicked()
 {
+    Serializator::Instance().DeleteItem(static_cast<CustomTreeItem*>(ui->treeWidget->currentItem()));
     ui->treeWidget->removeItemWidget(ui->treeWidget->currentItem(), 0);
     delete ui->treeWidget->currentItem();
 }

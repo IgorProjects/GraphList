@@ -25,11 +25,17 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    customtreewidget.cpp
+    idmanager.cpp \
+    serializator.cpp \
+    customtreeitem.cpp \
+    clickablelabel.cpp
 
 HEADERS += \
         mainwindow.h \
-    customtreewidget.h
+    idmanager.h \
+    serializator.h \
+    customtreeitem.h \
+    clickablelabel.h
 
 FORMS += \
         mainwindow.ui
