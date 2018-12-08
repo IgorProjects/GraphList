@@ -8,6 +8,7 @@ Serializator::Serializator(const QString& file)
     if (m_dotFile.open(QIODevice::WriteOnly | QIODevice::Text))
     {
         QTextStream textStream(&m_dotFile);
+        textStream.setCodec("UTF-8");
         textStream << "digraph D {" << endl;
         textStream << endl;
         textStream << "}" << endl;
@@ -26,12 +27,16 @@ void Serializator::AddlItem(CustomTreeItem *item, CustomTreeItem* parent)
     if (m_dotFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         QTextStream textStream(&m_dotFile);
+        textStream.setCodec("UTF-8");
+        textStream.setGenerateByteOrderMark(false);
         QStringList tempList = textStream.readAll().split("\n");
         tempList.erase(tempList.end()-1);
         m_dotFile.close();
         QFile::resize(m_dotFile.fileName(),0);
         QString temp;
         QTextStream tempStream(&temp);
+        tempStream.setCodec("UTF-8");
+        tempStream.setGenerateByteOrderMark(false);
         tempStream << "{rank=" << item->GetLevelId()
                    << " " << item->GetItemId() << "}";
         tempList.insert(m_lastLine++, temp);
@@ -59,6 +64,8 @@ void Serializator::DeleteItem(CustomTreeItem *item, bool hasChild)
     if (m_dotFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         QTextStream textStream(&m_dotFile);
+        textStream.setCodec("UTF-8");
+        textStream.setGenerateByteOrderMark(false);
         QStringList tempList = textStream.readAll().split("\n");
         tempList.erase(tempList.end()-1);
         m_dotFile.close();
@@ -87,6 +94,50 @@ void Serializator::DeleteItem(CustomTreeItem *item, bool hasChild)
         }
     }
 }
+
+void Serializator::RenameItem(CustomTreeItem *item)
+{
+    if (m_dotFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        QTextStream textStream(&m_dotFile);
+        textStream.setCodec("UTF-8");
+        textStream.setGenerateByteOrderMark(false);
+        QStringList tempList = textStream.readAll().split("\n");
+        tempList.erase(tempList.end()-1);
+        m_dotFile.close();
+        QFile::resize(m_dotFile.fileName(),0);
+        auto rx = QRegExp(QString::number(item->GetItemId()).append(" *"));
+        rx.setPatternSyntax(QRegExp::Wildcard);
+        auto idx = tempList.indexOf(rx, 1);
+        tempList[idx] = QString::number(item->GetItemId())
+                .append(" [label=\"")
+                .append(item->GetLabel())
+                .append("\"]");
+        if (m_dotFile.open(QIODevice::WriteOnly | QIODevice::Text))
+        {
+            for (auto& str : tempList)
+                textStream << str << endl;
+            m_dotFile.close();
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

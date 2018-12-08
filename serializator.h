@@ -12,6 +12,7 @@ public:
     static Serializator& Instance();
     void AddlItem(CustomTreeItem* item, CustomTreeItem* parent = nullptr);
     void DeleteItem(CustomTreeItem* item, bool hasChild = false);
+    void RenameItem(CustomTreeItem* item);
 private:
     Serializator(const QString& file = "dotfile");
     Serializator(const Serializator& root) = delete;

@@ -27,7 +27,7 @@ void MainWindow::on_addButton_clicked()
         QMessageBox::warning(this, "Ошибочка", "Введите имя элемента!");
         return;
     }
-    auto newItem = new CustomTreeItem(ui->newItemName->text());
+    auto newItem = new CustomTreeItem(ui->newItemName->text(), ui->treeWidget);
     if (ui->treeWidget->currentItem() != nullptr) {
         Serializator::Instance().AddlItem(newItem, static_cast<CustomTreeItem*>(ui->treeWidget->currentItem()));
         ui->treeWidget->currentItem()->addChild(newItem);
@@ -35,7 +35,7 @@ void MainWindow::on_addButton_clicked()
         Serializator::Instance().AddlItem(newItem);
         ui->treeWidget->addTopLevelItem(newItem);
     }
-    //newItem->SetItemWidget(ui->treeWidget);
+    newItem->FirstSetLabel();
     ui->newItemName->clear();
 }
 

@@ -27,13 +27,15 @@ SOURCES += \
         mainwindow.cpp \
     idmanager.cpp \
     serializator.cpp \
-    customtreeitem.cpp
+    customtreeitem.cpp \
+    clickablelabel.cpp
 
 HEADERS += \
         mainwindow.h \
     idmanager.h \
     serializator.h \
-    customtreeitem.h
+    customtreeitem.h \
+    clickablelabel.h
 
 FORMS += \
         mainwindow.ui
