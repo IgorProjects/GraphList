@@ -1,12 +1,17 @@
 #include "customtreeitem.h"
 
-CustomTreeItem::CustomTreeItem(QString nameS, QTreeWidget* tree, unsigned int level)
+CustomTreeItem::CustomTreeItem(QString name, unsigned int level)
     : m_id(IdManager::Instance().GetId()), m_level(level)
 {
-    this->lineEdit = new QLineEdit();
-    this->lineEdit->setText(nameS);
-    this->name = this->lineEdit->text();
-    tree->setItemWidget(this, 0, this->lineEdit);
+    m_lineEdit = new QLineEdit();
+    m_lineEdit->setText(name);
+    m_lineEdit->setReadOnly(true);
+    this->setText(0, name);
+}
+
+void CustomTreeItem::SetItemWidget(QTreeWidget *tree)
+{
+    tree->setItemWidget(this, 0, m_lineEdit);
 }
 
 unsigned int CustomTreeItem::GetItemId() const
@@ -21,5 +26,5 @@ unsigned int CustomTreeItem::GetLevelId() const
 
 QString CustomTreeItem::GetLabel() const
 {
-    return name;
+    return m_lineEdit->text();
 }
