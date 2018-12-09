@@ -18,7 +18,6 @@ public:
     ~MainWindow();
 
     QTreeWidgetItem* item = new QTreeWidgetItem();
-    ImageViewer* imageViewer;
 
 private slots:
 

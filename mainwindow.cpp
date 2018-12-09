@@ -13,7 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->treeWidget->clear();
     ui->treeWidget->setContextMenuPolicy(Qt::CustomContextMenu);
-    imageViewer->show();
+    ImageViewer imageViewer;
+    imageViewer.show();
     connect(ui->treeWidget, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(unfocus(const QPoint&)));
 }
 
