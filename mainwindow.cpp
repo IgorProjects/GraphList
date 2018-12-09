@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->treeWidget->clear();
     ui->treeWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+    imageViewer = new ImageViewer(ui->scrollArea);
+    connect(ui->pushButton, SIGNAL(pressed()), imageViewer, SLOT(zoomIn()));
     connect(ui->treeWidget, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(unfocus(const QPoint&)));
 }
 

@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QTreeWidgetItem>
+#include <imageviewer.h>
 
 namespace Ui {
 class MainWindow;
@@ -16,8 +17,6 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    QTreeWidgetItem* item = new QTreeWidgetItem();
-
 private slots:
 
     void on_addButton_clicked();
@@ -28,6 +27,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    ImageViewer* imageViewer;
+
 };
 
 #endif // MAINWINDOW_H

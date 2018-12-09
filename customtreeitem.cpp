@@ -51,7 +51,7 @@ QString CustomTreeItem::GetLabel() const
 CustomTreeItem::~CustomTreeItem()
 {
     delete m_lineEdit;
-    delete m_label;
+    //delete m_label;
 }
 
 void CustomTreeItem::makeEditable()
