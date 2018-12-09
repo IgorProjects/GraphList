@@ -5,13 +5,14 @@
 #include <QTextStream>
 #include <QRegExp>
 #include "customtreeitem.h"
+#include "imageviewer.h"
 
 class Serializator
 {
 public:
     static Serializator& Instance();
-    void AddlItem(CustomTreeItem* item, CustomTreeItem* parent = nullptr);
-    void DeleteItem(CustomTreeItem* item, bool hasChild = false);
+    void AddlItem(CustomTreeItem* item, CustomTreeItem* parent = nullptr, ImageViewer* iv = nullptr);
+    void DeleteItem(CustomTreeItem* item, bool hasChild = false, ImageViewer* iv = nullptr);
     void RenameItem(CustomTreeItem* item);
 private:
     Serializator(const QString& file = "dotfile");

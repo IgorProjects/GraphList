@@ -5,6 +5,9 @@
 #-------------------------------------------------
 
 QT       += core gui widgets
+QT += widgets
+requires(qtConfig(filedialog))
+qtHaveModule(printsupport): QT += printsupport
 
 TARGET = GraphList
 TEMPLATE = app
@@ -28,14 +31,16 @@ SOURCES += \
     idmanager.cpp \
     serializator.cpp \
     customtreeitem.cpp \
-    clickablelabel.cpp
+    clickablelabel.cpp \
+    imageviewer.cpp
 
 HEADERS += \
         mainwindow.h \
     idmanager.h \
     serializator.h \
     customtreeitem.h \
-    clickablelabel.h
+    clickablelabel.h \
+    imageviewer.h
 
 FORMS += \
         mainwindow.ui

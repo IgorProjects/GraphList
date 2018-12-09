@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QTreeWidgetItem>
+#include <imageviewer.h>
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +18,7 @@ public:
     ~MainWindow();
 
     QTreeWidgetItem* item = new QTreeWidgetItem();
+    ImageViewer* imageViewer;
 
 private slots:
 
