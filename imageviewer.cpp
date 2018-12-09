@@ -8,9 +8,9 @@
 
 #include "imageviewer.h"
 
-ImageViewer::ImageViewer()
+ImageViewer::ImageViewer(QScrollArea* scrollArea)
    : imageLabel(new QLabel)
-   , scrollArea(new QScrollArea)
+   , scrollArea(scrollArea)
    , scaleFactor(1)
 {
     imageLabel->setBackgroundRole(QPalette::Base);
@@ -20,18 +20,18 @@ ImageViewer::ImageViewer()
     scrollArea->setBackgroundRole(QPalette::Dark);
     scrollArea->setWidget(imageLabel);
     scrollArea->setVisible(false);
-    setCentralWidget(scrollArea);
+    //setCentralWidget(scrollArea);
 
-//    createActions();
+    createActions();
 
     resize(QGuiApplication::primaryScreen()->availableSize() * 3 / 5);
 
-    connect(&Serializator::Instance(), SIGNAL(fileChanged), this, SLOT(updateImage()));
+    connect(&Serializator::Instance(), SIGNAL(fileChanged()), this, SLOT(updateImage()));
 }
 
 void ImageViewer::updateImage()
 {
-    this->loadFile("./dotengine/dot.png");
+    loadFile("dotengine/dot.png");
 }
 
 bool ImageViewer::loadFile(const QString &fileName)

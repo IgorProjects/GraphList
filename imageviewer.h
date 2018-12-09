@@ -14,12 +14,12 @@ class QMenu;
 class QScrollArea;
 class QScrollBar;
 
-class ImageViewer : public QMainWindow
+class ImageViewer : public QWidget
 {
     Q_OBJECT
 
 public:
-    ImageViewer();
+    ImageViewer(QScrollArea* scrollArea);
     bool loadFile(const QString &);
 
 public slots:

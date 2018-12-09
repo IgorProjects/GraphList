@@ -56,6 +56,7 @@ void Serializator::AddlItem(CustomTreeItem *item, CustomTreeItem* parent)
                 textStream << str << endl;
             m_dotFile.close();
         }
+        QProcess::execute(SERIALIZE_COMMAND);
         emit fileChanged();
     }
 }
@@ -93,6 +94,7 @@ void Serializator::DeleteItem(CustomTreeItem *item, bool hasChild)
                 textStream << str << endl;
             m_dotFile.close();
         }
+        QProcess::execute(SERIALIZE_COMMAND);
         emit fileChanged();
     }
 }
@@ -121,6 +123,7 @@ void Serializator::RenameItem(CustomTreeItem *item)
                 textStream << str << endl;
             m_dotFile.close();
         }
+        QProcess::execute(SERIALIZE_COMMAND);
         emit fileChanged();
     }
 }

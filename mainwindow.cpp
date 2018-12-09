@@ -8,7 +8,8 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    imageViewer(ui->scrollArea)
 {
     ui->setupUi(this);
     ui->treeWidget->clear();
