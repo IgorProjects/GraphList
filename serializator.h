@@ -6,7 +6,7 @@
 #include <QRegExp>
 #include "customtreeitem.h"
 
-class Serializator
+class Serializator : public QObject
 {
 public:
     static Serializator& Instance();
