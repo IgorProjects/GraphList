@@ -1,5 +1,4 @@
 #include "serializator.h"
-#include "imageviewer.h"
 
 Serializator::Serializator(const QString& file)
     : m_dotFile(file), m_lastLine(1)
@@ -23,7 +22,7 @@ Serializator& Serializator::Instance()
     return theSingleInstance;
 }
 
-void Serializator::AddlItem(CustomTreeItem *item, CustomTreeItem* parent, ImageViewer* iv)
+void Serializator::AddlItem(CustomTreeItem *item, CustomTreeItem* parent)
 {
     if (m_dotFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
@@ -57,11 +56,10 @@ void Serializator::AddlItem(CustomTreeItem *item, CustomTreeItem* parent, ImageV
                 textStream << str << endl;
             m_dotFile.close();
         }
-        iv->loadFile("./dotengine/dot.png");
     }
 }
 
-void Serializator::DeleteItem(CustomTreeItem *item, bool hasChild, ImageViewer* iv)
+void Serializator::DeleteItem(CustomTreeItem *item, bool hasChild)
 {
     if (m_dotFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
@@ -94,7 +92,6 @@ void Serializator::DeleteItem(CustomTreeItem *item, bool hasChild, ImageViewer* 
                 textStream << str << endl;
             m_dotFile.close();
         }
-        iv->loadFile("./dotengine/dot.png");
     }
 }
 

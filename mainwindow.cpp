@@ -24,17 +24,18 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_addButton_clicked()
 {    
-    ImageViewer* iv = this->imageViewer;
     if (ui->newItemName->text() == "") {
         QMessageBox::warning(this, "Ошибочка", "Введите имя элемента!");
         return;
     }
     auto newItem = new CustomTreeItem(ui->newItemName->text(), ui->treeWidget);
     if (ui->treeWidget->currentItem() != nullptr) {
-        Serializator::Instance().AddlItem(newItem, static_cast<CustomTreeItem*>(ui->treeWidget->currentItem()), imageViewer);
+        Serializator::Instance().AddlItem(newItem, static_cast<CustomTreeItem*>(ui->treeWidget->currentItem()));
+        imageViewer->loadFile("./dotengine/dot.png");
         ui->treeWidget->currentItem()->addChild(newItem);
     } else {
-        Serializator::Instance().AddlItem(newItem, nullptr, imageViewer);
+        Serializator::Instance().AddlItem(newItem);
+        imageViewer->loadFile("./dotengine/dot.png");
         ui->treeWidget->addTopLevelItem(newItem);
     }
     newItem->FirstSetLabel();
@@ -43,7 +44,8 @@ void MainWindow::on_addButton_clicked()
 
 void MainWindow::on_deleteButton_clicked()
 {
-    Serializator::Instance().DeleteItem(static_cast<CustomTreeItem*>(ui->treeWidget->currentItem()), false, imageViewer);
+    Serializator::Instance().DeleteItem(static_cast<CustomTreeItem*>(ui->treeWidget->currentItem()));
+    imageViewer->loadFile("./dotengine/dot.png");
     ui->treeWidget->removeItemWidget(ui->treeWidget->currentItem(), 0);
     delete ui->treeWidget->currentItem();
 }
