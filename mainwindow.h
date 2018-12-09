@@ -27,7 +27,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    ImageViewer imageViewer;
+    ImageViewer* imageViewer;
 
 };
 
