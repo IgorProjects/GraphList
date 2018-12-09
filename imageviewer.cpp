@@ -25,8 +25,14 @@ ImageViewer::ImageViewer()
 //    createActions();
 
     resize(QGuiApplication::primaryScreen()->availableSize() * 3 / 5);
+
+    connect(sr, SIGNAL(fileChanged), this, SLOT(updateImage()));
 }
 
+void ImageViewer::updateImage()
+{
+    this->loadFile("./dotengine/dot.png");
+}
 
 bool ImageViewer::loadFile(const QString &fileName)
 {

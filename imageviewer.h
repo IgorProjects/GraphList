@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QImage>
+#include "serializator.h"
 #ifndef QT_NO_PRINTER
 #include <QPrinter>
 #endif
@@ -20,6 +21,9 @@ class ImageViewer : public QMainWindow
 public:
     ImageViewer();
     bool loadFile(const QString &);
+
+public slots:
+    void updateImage();
 
 private slots:
     void open();
@@ -46,6 +50,7 @@ private:
     QLabel *imageLabel;
     QScrollArea *scrollArea;
     double scaleFactor;
+    Serializator* sr; // WHAT ?
 
 #ifndef QT_NO_PRINTER
     QPrinter printer;
