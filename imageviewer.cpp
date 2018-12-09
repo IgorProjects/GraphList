@@ -26,7 +26,7 @@ ImageViewer::ImageViewer()
 
     resize(QGuiApplication::primaryScreen()->availableSize() * 3 / 5);
 
-    connect(sr, SIGNAL(fileChanged), this, SLOT(updateImage()));
+    connect(Serializator::Instance(), SIGNAL(fileChanged), this, SLOT(updateImage()));
 }
 
 void ImageViewer::updateImage()

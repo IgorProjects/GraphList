@@ -50,7 +50,6 @@ private:
     QLabel *imageLabel;
     QScrollArea *scrollArea;
     double scaleFactor;
-    Serializator* sr; // WHAT ?
 
 #ifndef QT_NO_PRINTER
     QPrinter printer;
