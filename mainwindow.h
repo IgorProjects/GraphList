@@ -16,6 +16,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    QTableWidget* table;
+    QTableWidget* nextTable;
 
 private slots:
 
@@ -24,6 +26,12 @@ private slots:
     void on_deleteButton_clicked();
 
     void unfocus(const QPoint &pos);
+
+    void on_setCritNum_clicked();
+
+    void setNewTable();
+
+    void on_pushButton_3_clicked();
 
 private:
     Ui::MainWindow *ui;
