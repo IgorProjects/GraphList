@@ -6,13 +6,13 @@ CustomTreeItem::CustomTreeItem(QString name, QTreeWidget* tree, QTableWidget* ta
       m_id(IdManager::Instance().GetId()),
       m_label(new ClickableLabel(name)),
       m_lineEdit(new QLineEdit(name)),
-      m_level(level)
+      m_level(level),
+      layoutIndex(-1)
 {
     connect(m_label, SIGNAL(doubleClicked()), this, SLOT(makeEditable()));
     connect(m_lineEdit, SIGNAL(editingFinished()), this, SLOT(makeNonEditable()));
     m_table = new QTableWidget();
     initTable(table);
-//    connect(m_table, SIGNAL(cellChanged(int, int)), this, SLOT(sumTableValues())); //doesnt work (cycle)
 }
 
 void CustomTreeItem::SetLineEdit()
@@ -54,7 +54,7 @@ QString CustomTreeItem::GetLabel() const
 CustomTreeItem::~CustomTreeItem()
 {
     delete m_lineEdit;
-    delete m_table;
+    //delete m_table;
     //delete m_label;
 }
 
@@ -77,6 +77,7 @@ void CustomTreeItem::initTable(QTableWidget* table)
     m_table->setColumnCount(2);
     for (int j = 0; j < 2; j++) {
         for (int i = 1; i < m_table->rowCount() - 1; i++) {
+            //TODO: fix read access violation if table is clear
             m_table->setItem(i, j, new QTableWidgetItem(table->item(i - 1, j)->text()));
         }
     }

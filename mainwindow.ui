@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>817</width>
+    <width>1109</width>
     <height>608</height>
    </rect>
   </property>
@@ -79,23 +79,10 @@
      </item>
     </layout>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
-    <property name="geometry">
-     <rect>
-      <x>63</x>
-      <y>370</y>
-      <width>141</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Удалить таблицу</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
-      <x>230</x>
+      <x>160</x>
       <y>370</y>
       <width>114</width>
       <height>32</height>
@@ -111,8 +98,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>817</width>
-     <height>22</height>
+     <width>1109</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -210,8 +197,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>72</width>
-          <height>538</height>
+          <width>78</width>
+          <height>539</height>
          </rect>
         </property>
        </widget>

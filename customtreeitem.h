@@ -23,7 +23,10 @@ public:
     unsigned int GetItemId() const;
     unsigned int GetLevelId() const;
     QString GetLabel() const;
+
     QTableWidget* m_table;
+    int layoutIndex;
+
     ~CustomTreeItem();
 public slots:
     void makeEditable();
@@ -35,6 +38,7 @@ private:
 
     unsigned m_id;
     unsigned m_level;
+
 };
 
 #endif // CUSTOMTREEWIDGET_H

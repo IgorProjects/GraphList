@@ -64,16 +64,22 @@ void MainWindow::on_setCritNum_clicked()
 void MainWindow::setNewTable()
 {
     CustomTreeItem* tempItem = static_cast<CustomTreeItem*>(ui->treeWidget->currentItem());
-    ui->horizontalLayout_6->addWidget(tempItem->m_table);
-//    qInfo("%d", ui->horizontalLayout_6->count());
-}
+    for (int i = 0; i < ui->horizontalLayout_6->count(); ++i)
+        ui->horizontalLayout_6->itemAt(i)->widget()->setVisible(false);
+    auto& idx = tempItem->layoutIndex;
+    if (idx == -1)
+    {
+        idx = ui->horizontalLayout_6->count();
+        ui->horizontalLayout_6->addWidget(tempItem->m_table);
+    }
+    else
+    {
+        ui->horizontalLayout_6->itemAt(idx)->widget()->setVisible(true);
+    }
+    //ui->horizontalLayout_6->takeAt(0);
+    //ui->horizontalLayout_6->addWidget(tempItem->m_table);
 
-void MainWindow::on_pushButton_2_clicked()
-{
-    //todo: на эту кнопку либо на слот setNewTable сделать нормальный реплейс таблицы:
-    //текущий виджет, который лежит в лейаут6, заменить на m_table, который лежит у currentItem
-    ui->horizontalLayout_6->removeWidget(ui->horizontalLayout_6->takeAt(0)->widget());
-//    ui->horizontalLayout_6->removeItem(ui->horizontalLayout_6->takeAt(1));
+//    qInfo("%d", ui->horizontalLayout_6->count());
 }
 
 void MainWindow::on_pushButton_3_clicked()
