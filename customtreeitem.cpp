@@ -118,7 +118,7 @@ bool CustomTreeItem::sumTableValues()
             sum += (m_table->item(i, 1)->text().toDouble());
     }
     m_table->setItem(m_table->rowCount() - 1, 1, new QTableWidgetItem(QString("Sum:") + QString::number(sum, 'f', 2)));
-    if (sum != 1) {
+    if (qRound(sum*10000000)/10000000 != 1) {
         m_table->item(m_table->rowCount() - 1, 1)->setTextColor(QColor(255, 0, 0));
         isIncorret = true;
     } else {
@@ -131,7 +131,7 @@ bool CustomTreeItem::sumTableValues()
                 sum += (m_table->item(i, j)->text().toDouble());
         }
         m_table->setItem(i, 2, new QTableWidgetItem(QString::number(sum, 'f', 2)));
-        if (sum != 1) {
+        if (qRound(sum*10000000)/10000000 != 1) {
             m_table->item(i, 2)->setTextColor(QColor(255, 0, 0));
             isIncorret = true;
         } else {
@@ -160,8 +160,9 @@ void CustomTreeItem::setCritCount(int count) {
             m_table->insertRow(i);
         }
     } else {
-        for (int i = m_table->rowCount() - 2; i > count + 1; i--) {
-            m_table->removeRow(i + 1);
+        int j = m_table->rowCount() - 2;
+        for (int i = j; i > count; i--) {
+            m_table->removeRow(i);
         }
     }
 
