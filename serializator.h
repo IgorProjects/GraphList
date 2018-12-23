@@ -1,6 +1,9 @@
 #ifndef SERIALIZATOR_H
 #define SERIALIZATOR_H
 
+// for mac:
+//#define SERIALIZE_COMMAND "dot -Tpng /Users/keet/dotfile -o /Users/keet/dot.png"
+//for pc:
 #define SERIALIZE_COMMAND "dotengine/dot.exe -Tpng dotengine/dotfile -o dotengine/dot.png"
 
 #include <QFile>
@@ -20,6 +23,9 @@ public:
 signals:
     void fileChanged();
 private:
+//    for mac:
+//    Serializator(const QString& file = "/Users/keet/dotfile");
+//    for pc:
     Serializator(const QString& file = "dotengine/dotfile");
     Serializator(const Serializator& root) = delete;
     Serializator& operator=(const Serializator&) = delete;
