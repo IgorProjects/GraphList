@@ -65,6 +65,10 @@ void MainWindow::unfocus(const QPoint &pos)
 
 void MainWindow::on_setCritNum_clicked()
 {
+    if (ui->critNum->text().toInt() < 1) {
+        QMessageBox::warning(this, "Ошибка!", "Количество критериев должно быть больше нуля!");
+        return;
+    }
     if (ui->treeWidget->currentItem() != nullptr) {
         static_cast<CustomTreeItem*>(ui->treeWidget->currentItem())->setCritCount(ui->critNum->text().toInt());
     }
