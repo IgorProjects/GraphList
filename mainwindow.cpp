@@ -50,9 +50,12 @@ void MainWindow::on_addButton_clicked()
 
 void MainWindow::on_deleteButton_clicked()
 {
-    Serializator::Instance().DeleteItem(static_cast<CustomTreeItem*>(ui->treeWidget->currentItem()));
+    auto ptrToItem = static_cast<CustomTreeItem*>(ui->treeWidget->currentItem());
+    if (!ptrToItem)
+        return;
+    Serializator::Instance().DeleteItem(ptrToItem);
     if (ui->treeWidget->currentItem()->parent() != nullptr) {
-        static_cast<CustomTreeItem*>(ui->treeWidget->currentItem()->parent())->deleteFromTable(static_cast<CustomTreeItem*>(ui->treeWidget->currentItem()));
+        static_cast<CustomTreeItem*>(ui->treeWidget->currentItem()->parent())->deleteFromTable(ptrToItem);
     }
     ui->treeWidget->removeItemWidget(ui->treeWidget->currentItem(), 0);
     delete ui->treeWidget->currentItem();
