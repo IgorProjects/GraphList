@@ -18,7 +18,7 @@ class Serializator : public QObject
 public:
     static Serializator& Instance();
     void AddlItem(CustomTreeItem* item, CustomTreeItem* parent = nullptr);
-    void DeleteItem(CustomTreeItem* item, bool hasChild = false);
+    void DeleteItem(CustomTreeItem* item);
     void RenameItem(CustomTreeItem* item);
 signals:
     void fileChanged();

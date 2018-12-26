@@ -61,7 +61,7 @@ void Serializator::AddlItem(CustomTreeItem *item, CustomTreeItem* parent)
     }
 }
 
-void Serializator::DeleteItem(CustomTreeItem *item, bool hasChild)
+void Serializator::DeleteItem(CustomTreeItem *item)
 {
     if (m_dotFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
@@ -77,7 +77,7 @@ void Serializator::DeleteItem(CustomTreeItem *item, bool hasChild)
         auto idx = tempList.indexOf(rx, 1) - 1;
         tempList.erase(tempList.begin()+idx, tempList.begin()+idx+3);
         m_lastLine -= 3;
-        if (hasChild)
+        if (item->childCount() != 0)
         {
             rx = QRegExp(QString::number(item->GetItemId()).append(" -*"));
             rx.setPatternSyntax(QRegExp::Wildcard);
