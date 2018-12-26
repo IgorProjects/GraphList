@@ -4,9 +4,6 @@
 #include <QMainWindow>
 #include <QImage>
 #include "serializator.h"
-#ifndef QT_NO_PRINTER
-#include <QPrinter>
-#endif
 
 class QLabel;
 class QScrollArea;
@@ -35,10 +32,6 @@ private:
     QLabel *imageLabel;
     QScrollArea *scrollArea;
     double scaleFactor;
-
-#ifndef QT_NO_PRINTER
-    QPrinter printer;
-#endif
 };
 
 #endif

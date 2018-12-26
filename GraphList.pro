@@ -7,7 +7,6 @@
 QT       += core gui widgets
 QT += widgets
 requires(qtConfig(filedialog))
-qtHaveModule(printsupport): QT += printsupport
 
 TARGET = GraphList
 TEMPLATE = app

@@ -4,6 +4,7 @@
 #include <QTreeWidgetItem>
 #include <QLineEdit>
 #include <QTableWidget>
+#include <QMessageBox>
 #include "clickablelabel.h"
 #include "idmanager.h"
 
@@ -11,13 +12,14 @@ class CustomTreeItem : public QObject, public QTreeWidgetItem
 {
     Q_OBJECT
 public:
-    CustomTreeItem(QString name, QTreeWidget* tree, QTableWidget* table, unsigned int m_level = 1);
+    CustomTreeItem(QString name, QTreeWidget* tree, unsigned int m_level = 1);
     void SetLineEdit();
     void SetLabel();
     void FirstSetLabel();
-    void initTable(QTableWidget* );
+    void initTable();
+    void setCritCount(int count);
     void addToTable(CustomTreeItem* );
-    void sumTableValues();
+    bool sumTableValues();
     void deleteFromTable(CustomTreeItem* );
     void renameTableItem(CustomTreeItem* );
     unsigned int GetItemId() const;

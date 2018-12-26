@@ -24,6 +24,9 @@ ImageViewer::ImageViewer(QScrollArea* scrollArea)
 
 void ImageViewer::updateImage()
 {
+//    for mac:
+//    loadFile("/Users/keet/dot.png");
+//    for pc:
     loadFile("dotengine/dot.png");
 }
 

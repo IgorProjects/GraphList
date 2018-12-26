@@ -14,9 +14,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->treeWidget->clear();
     ui->treeWidget->setContextMenuPolicy(Qt::CustomContextMenu);
     imageViewer = new ImageViewer(ui->scrollArea);
+    ui->critNum->setVisible(false);
+    ui->setCritNum->setVisible(false);
+    ui->pushButton_3->setVisible(false);
+    ui->pushButton_2->setVisible(false); //delete this if using mac
     connect(ui->treeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)), this, SLOT(setNewTable()));
-    connect(ui->pushButton, SIGNAL(pressed()), imageViewer, SLOT(zoomIn()));
+//    connect(ui->pushButton, SIGNAL(pressed()), imageViewer, SLOT(zoomIn()));
     connect(ui->treeWidget, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(unfocus(const QPoint&)));
+    connect(ui->pushButton_2, SIGNAL(clicked()), imageViewer, SLOT(updateImage()));
 }
 
 MainWindow::~MainWindow()
@@ -30,7 +35,7 @@ void MainWindow::on_addButton_clicked()
         QMessageBox::warning(this, "Ошибочка", "Введите имя элемента!");
         return;
     }
-    auto newItem = new CustomTreeItem(ui->newItemName->text(), ui->treeWidget, ui->tableWidget);
+    auto newItem = new CustomTreeItem(ui->newItemName->text(), ui->treeWidget);
     if (ui->treeWidget->currentItem() != nullptr) {
         Serializator::Instance().AddlItem(newItem, static_cast<CustomTreeItem*>(ui->treeWidget->currentItem()));
         ui->treeWidget->currentItem()->addChild(newItem);
@@ -45,8 +50,13 @@ void MainWindow::on_addButton_clicked()
 
 void MainWindow::on_deleteButton_clicked()
 {
-    Serializator::Instance().DeleteItem(static_cast<CustomTreeItem*>(ui->treeWidget->currentItem()));
-    static_cast<CustomTreeItem*>(ui->treeWidget->currentItem()->parent())->deleteFromTable(static_cast<CustomTreeItem*>(ui->treeWidget->currentItem()));
+    auto ptrToItem = static_cast<CustomTreeItem*>(ui->treeWidget->currentItem());
+    if (!ptrToItem)
+        return;
+    Serializator::Instance().DeleteItem(ptrToItem);
+    if (ui->treeWidget->currentItem()->parent() != nullptr) {
+        static_cast<CustomTreeItem*>(ui->treeWidget->currentItem()->parent())->deleteFromTable(ptrToItem);
+    }
     ui->treeWidget->removeItemWidget(ui->treeWidget->currentItem(), 0);
     delete ui->treeWidget->currentItem();
 }
@@ -58,12 +68,32 @@ void MainWindow::unfocus(const QPoint &pos)
 
 void MainWindow::on_setCritNum_clicked()
 {
-    ui->tableWidget->setRowCount(ui->critNum->text().toInt());
+    if (ui->critNum->text().toInt() < 1) {
+        QMessageBox::warning(this, "Ошибка!", "Количество критериев должно быть больше нуля!");
+        return;
+    }
+    if (ui->treeWidget->currentItem() != nullptr) {
+        static_cast<CustomTreeItem*>(ui->treeWidget->currentItem())->setCritCount(ui->critNum->text().toInt());
+    }
+    ui->critNum->clear();
+
+
 }
 
 void MainWindow::setNewTable()
 {
     CustomTreeItem* tempItem = static_cast<CustomTreeItem*>(ui->treeWidget->currentItem());
+    if (tempItem == nullptr) {
+        for (int i = 0; i < ui->horizontalLayout_6->count(); ++i)
+            ui->horizontalLayout_6->itemAt(i)->widget()->setVisible(false);
+        ui->critNum->setVisible(false);
+        ui->setCritNum->setVisible(false);
+        ui->pushButton_3->setVisible(false);
+        return;
+    }
+    ui->critNum->setVisible(true);
+    ui->setCritNum->setVisible(true);
+    ui->pushButton_3->setVisible(true);
     for (int i = 0; i < ui->horizontalLayout_6->count(); ++i)
         ui->horizontalLayout_6->itemAt(i)->widget()->setVisible(false);
     auto& idx = tempItem->layoutIndex;
@@ -76,13 +106,12 @@ void MainWindow::setNewTable()
     {
         ui->horizontalLayout_6->itemAt(idx)->widget()->setVisible(true);
     }
-    //ui->horizontalLayout_6->takeAt(0);
-    //ui->horizontalLayout_6->addWidget(tempItem->m_table);
-
-//    qInfo("%d", ui->horizontalLayout_6->count());
 }
 
 void MainWindow::on_pushButton_3_clicked()
 {
-    static_cast<CustomTreeItem*>(ui->treeWidget->currentItem())->sumTableValues();
+    if (!static_cast<CustomTreeItem*>(ui->treeWidget->currentItem())->sumTableValues()) {
+        QMessageBox::warning(this, "Ошибка", "Проверьте введенные значения!");
+    }
 }
+
